@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/codeByMihaly/Weather-App/issues"
   },
-  "homepage": "https://github.com/codeByMihaly/Weather-App#readme",
+  "homepage": "https://codebymihaly.github.io/Weather-App",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "css-loader": "^7.1.2",
