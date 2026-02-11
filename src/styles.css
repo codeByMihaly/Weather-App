@@ -1,0 +1,45 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+#render {
+  align-self: center;
+}
+
+#header-id {
+  background-color: lightblue;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 1em;
+}
+
+#footer-id {
+  background-color: lightblue;
+  display: flex;
+  width: 100%;
+  margin: auto 0 0 0;
+  justify-content: center;
+}
