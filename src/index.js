@@ -1,2 +1,4 @@
 import "./styles.css";
-import { hello } from "./num1.js";
+import headerRender from "./header.js";
+
+headerRender();

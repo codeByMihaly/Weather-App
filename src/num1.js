@@ -1,10 +1,5 @@
 const container = document.getElementById("container");
 
-const header = document.createElement("h1");
-header.id = "header-id";
-header.textContent = "Weather app!";
-container.appendChild(header);
-
 const form = document.createElement("form");
 
 const formInput = document.createElement("input");
