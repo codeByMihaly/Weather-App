@@ -1,6 +1,6 @@
 import renderHours from "./renderHours.js";
 import renderDays from "./renderDays.js";
-import WeatherFields from "./renderWeatherInfo.js";
+import WeatherFields from "./renderWeatherFields.js";
 
 const renderWeather = (data, render) => {
   render.innerHTML = "";
@@ -19,8 +19,7 @@ const renderWeather = (data, render) => {
       value = data.currentConditions[key];
     }
 
-    div.textContent = `
-        ${fields[key]}: ${value}`;
+    div.textContent = ` ${WeatherFields[key]}: ${value}`;
     render.appendChild(div);
   }
 

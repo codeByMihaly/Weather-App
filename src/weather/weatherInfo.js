@@ -1,14 +1,14 @@
-import fetchWeather from "./fetchWeather.js";
+import weather from "./fetchWeather.js";
 import renderWeather from "./renderWeather.js";
 
 const renderWeatherInfo = () => {
   const container = document.getElementById("container");
 
   const form = document.createElement("form");
-  const input = document.createElement("input");
-  input.id = "form-input-id";
-  input.placeholder = "Type a place";
-  input.value = "Budapest";
+  const formInput = document.createElement("input");
+  formInput.id = "form-input-id";
+  formInput.placeholder = "Type a place";
+  formInput.value = "Budapest";
 
   const btn = document.createElement("button");
   btn.textContent = "Search";
@@ -19,7 +19,7 @@ const renderWeatherInfo = () => {
   const errorMsg = document.createElement("div");
   errorMsg.id = "error-msg";
 
-  form.appendChild(input);
+  form.appendChild(formInput);
   form.appendChild(btn);
 
   container.appendChild(form);
@@ -29,14 +29,14 @@ const renderWeatherInfo = () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const location = input.value.trim();
+    const location = formInput.value.trim();
     if (!location) {
       errorMsg.textContent = "Must search for a city!";
       render.innerHTML = "";
       return;
     }
 
-    const data = await fetchWeather(location);
+    const data = await weather(location);
 
     if (!data || data.error) {
       errorMsg.textContent = "Sorry! Not a valid place!";

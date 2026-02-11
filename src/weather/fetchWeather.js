@@ -1,7 +1,7 @@
-const weather = async function fetchWeather() {
+const weather = async function fetchWeather(location) {
   try {
     const data = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${formInput.value}?key=FXXNUQBR8DRNNEDKXEQV8YWNJ`,
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=FXXNUQBR8DRNNEDKXEQV8YWNJ`,
     );
     const response = await data.json();
     console.log(response);
