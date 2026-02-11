@@ -1,29 +1,4 @@
-const container = document.getElementById("container");
-
-const form = document.createElement("form");
-
-const formInput = document.createElement("input");
-formInput.id = "form-input-id";
-formInput.placeholder = "Type a place";
-formInput.value = "Budapest";
-const formBtn = document.createElement("button");
-formBtn.id = "form-button-id";
-formBtn.textContent = "Search";
-
-const fields = {
-  datetime: "Date",
-  conditions: "Condition",
-  temp: "Temperature",
-  tempmin: "Min temperature",
-  tempmax: "Max temperature",
-  cloudcover: "Cloud cover",
-  dew: "Dew",
-  feelslike: "Feels like",
-  description: "Description",
-  humidity: "Humidity",
-  windspeed: "Windspeed",
-  address: "Address",
-};
+import renderWeatherInfo from "./weatherInfo.js";
 
 const weather = async function fetchWeather() {
   try {
@@ -34,7 +9,7 @@ const weather = async function fetchWeather() {
     console.log(response);
     return response;
   } catch (e) {
-    console.log(`Csicska hiba: ${e}`);
+    console.log(`Error: ${e}`);
     return null;
   }
 };
@@ -129,47 +104,3 @@ const renderWeather = async () => {
   errorMsg.textContent = "";
   renderWeatherData(updatedWeather);
 };
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  renderWeather();
-});
-
-form.append(formInput, formBtn);
-container.appendChild(form);
-
-const render = document.createElement("div");
-render.id = "render";
-
-const renderDate = document.createElement("div");
-const renderCondition = document.createElement("div");
-const renderTemp = document.createElement("div");
-const renderCloud = document.createElement("div");
-const renderDew = document.createElement("div");
-const renderFeels = document.createElement("div");
-const renderDescription = document.createElement("div");
-const renderHumidity = document.createElement("div");
-const renderWindSpeed = document.createElement("div");
-const renderAddress = document.createElement("div");
-
-container.appendChild(render);
-render.append(
-  renderDate,
-  renderCondition,
-  renderTemp,
-  renderCloud,
-  renderDew,
-  renderFeels,
-  renderDescription,
-  renderHumidity,
-  renderWindSpeed,
-  renderAddress,
-);
-
-const errorMsg = document.createElement("div");
-container.appendChild(errorMsg);
-
-const footer = document.createElement("h4");
-footer.id = "footer-id";
-footer.textContent = "CodeByMihaly";
-container.appendChild(footer);
