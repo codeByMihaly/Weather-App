@@ -1,9 +1,12 @@
 import renderHours from "./renderHours.js";
 import renderDays from "./renderDays.js";
-import WeatherFields from "./renderWeatherFields.js";
+import WeatherFields from "./weatherFields.js";
 
 const renderWeather = (data, render) => {
   render.innerHTML = "";
+
+  const weatherWrapper = document.createElement("div");
+  weatherWrapper.classList.add("weatherWrapper-field");
 
   for (const key in WeatherFields) {
     const div = document.createElement("div");
@@ -18,11 +21,12 @@ const renderWeather = (data, render) => {
     } else {
       value = data.currentConditions[key];
     }
-
     div.textContent = ` ${WeatherFields[key]}: ${value}`;
-    render.appendChild(div);
+
+    weatherWrapper.appendChild(div);
   }
 
+  render.appendChild(weatherWrapper);
   render.appendChild(renderHours(data));
   render.appendChild(renderDays(data));
 };

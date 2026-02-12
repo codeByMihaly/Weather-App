@@ -16,6 +16,15 @@ body {
   flex-direction: column;
 }
 
+#header-id {
+  background-color: lightblue;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 1em;
+}
+
 #container {
   display: flex;
   flex-direction: column;
@@ -24,16 +33,46 @@ body {
 }
 
 #render {
-  align-self: center;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, minmax(50px, 1fr));
+  grid-template-areas:
+    "weather weather weather weather weather weather"
+    "weather weather weather weather weather weather"
+    "hour hour hour day day day"
+    "hour hour hour day day day";
 }
 
-#header-id {
-  background-color: lightblue;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 1em;
+.weatherWrapper-field {
+  background-color: rgba(173, 216, 230, 0.26);
+  grid-area: weather;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.weather-field {
+  border: 2px solid rgb(192, 12, 12);
+  background-color: rgba(173, 216, 230, 0.26);
+}
+
+.hours {
+  display: grid;
+  grid-area: hour;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.hour-div {
+  border: 2px solid lightblue;
+}
+
+.days {
+  display: grid;
+  grid-area: day;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.day-div {
+  border: 2px solid yellow;
 }
 
 #footer-id {
