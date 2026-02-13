@@ -1,7 +1,17 @@
 import weather from "./fetchWeather.js";
 import renderWeather from "./renderWeather.js";
+import clear from "./backgroundImages/clear.jpg";
+import cloudy from "./backgroundImages/cloudy.jpg";
+import fog from "./backgroundImages/fog.jpg";
+import overcast from "./backgroundImages/overcast.jpg";
+import rain from "./backgroundImages/rain.jpg";
+import sand from "./backgroundImages/sand.jpg";
+import snow from "./backgroundImages/snow.jpg";
+import thunderstorm from "./backgroundImages/thunderstorm.jpg";
+import tornado from "./backgroundImages/tornado.jpg";
+import wind from "./backgroundImages/wind.jpg";
 
-const renderWeatherInfo = () => {
+export const renderWeatherInfo = () => {
   const container = document.getElementById("container");
 
   const form = document.createElement("form");
@@ -33,6 +43,7 @@ const renderWeatherInfo = () => {
     if (!location) {
       errorMsg.textContent = "Must search for a city!";
       render.innerHTML = "";
+      renderBackgroundImg(null);
       return;
     }
 
@@ -41,12 +52,56 @@ const renderWeatherInfo = () => {
     if (!data || data.error) {
       errorMsg.textContent = "Sorry! Not a valid place!";
       render.innerHTML = "";
+      renderBackgroundImg(null);
       return;
     }
 
     errorMsg.textContent = "";
     renderWeather(data, render);
+
+    const conditions = data.currentConditions.conditions;
+    renderBackgroundImg(conditions);
   });
 };
 
-export default renderWeatherInfo;
+export const renderBackgroundImg = (conditions) => {
+  const container = document.getElementById("container");
+
+  const oldImg = container.querySelector("#background-image");
+  if (oldImg) {
+    oldImg.remove();
+  }
+
+  if (!conditions) return;
+
+  const condition = conditions.toLowerCase();
+
+  const img = document.createElement("img");
+  img.id = "background-image";
+
+  if (condition.includes("rain")) {
+    img.src = rain;
+  } else if (condition.includes("clear")) {
+    img.src = clear;
+  } else if (condition.includes("cloudy")) {
+    img.src = cloudy;
+  } else if (condition.includes("fog")) {
+    img.src = fog;
+  } else if (condition.includes("overcast")) {
+    img.src = overcast;
+  } else if (condition.includes("sand")) {
+    img.src = sand;
+  } else if (condition.includes("snow")) {
+    img.src = snow;
+  } else if (condition.includes("thunderstorm")) {
+    img.src = thunderstorm;
+  } else if (condition.includes("tornado")) {
+    img.src = tornado;
+  } else if (condition.includes("wind")) {
+    img.src = wind;
+  } else {
+    return;
+  }
+
+  container.appendChild(img);
+};
