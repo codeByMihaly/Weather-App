@@ -1,16 +1,16 @@
 const WeatherFields = {
-  datetime: "Date",
-  conditions: "Condition",
+  datetime: "Observation Time",
+  conditions: "Weather Condition",
   temp: "Temperature",
-  tempmin: "Min temperature",
-  tempmax: "Max temperature",
-  cloudcover: "Cloud cover",
-  dew: "Dew",
-  feelslike: "Feels like",
-  description: "Description",
+  feelslike: "Feels Like",
+  tempmin: "Minimum Temperature",
+  tempmax: "Maximum Temperature",
+  windspeed: "Wind speed",
   humidity: "Humidity",
-  windspeed: "Windspeed",
-  address: "Address",
+  precipprob: "Precipitation probability",
+  precip: "Precipitation",
+  cloudcover: "Cloud cover",
+  description: "Description",
 };
 
 export default WeatherFields;

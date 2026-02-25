@@ -6,17 +6,20 @@ import storm from "./weatherIcons/stormIcon.png";
 import sunny from "./weatherIcons/sunnyIcon.png";
 import wind from "./weatherIcons/windIcon.png";
 
-const renderHours = (data) => {
+const renderHours = (data, currentUnit = "metric") => {
   const hours = document.createElement("div");
   hours.classList.add("hours");
+
+  const tempUnit = currentUnit === "metric" ? "°C" : "°F";
 
   data.days[0].hours.forEach((hour) => {
     const hourDiv = document.createElement("div");
     hourDiv.classList.add("hour-div");
 
     hourDiv.innerHTML = `
-      <div id="hour-time">Time: ${hour.datetime}</div>
-      <div id="hour-temp">Degree: ${hour.temp}</div>
+      <div id="hour-time">Hour: ${hour.datetime}</div>
+      <div id="hour-temp">Temp: ${hour.temp}${tempUnit}</div>
+      <div>Precipitation Probability: ${hour.precipprob}%</div>
     `;
 
     const img = document.createElement("img");

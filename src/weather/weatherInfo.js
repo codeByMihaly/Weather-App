@@ -1,5 +1,9 @@
-import weather from "./fetchWeather.js";
+﻿import weather from "./fetchWeather.js";
 import renderWeather from "./renderWeather.js";
+import { updateSearchedCity } from "../header.js";
+import renderDays from "./renderDays.js";
+import renderHours from "./renderHours.js";
+
 import clear from "./backgroundImages/clear.jpg";
 import cloudy from "./backgroundImages/cloudy.jpg";
 import fog from "./backgroundImages/fog.jpg";
@@ -18,13 +22,20 @@ export const renderWeatherInfo = () => {
   const form = document.createElement("form");
   const label = document.createElement("label");
   label.textContent = "Search for a city!";
+
   const formInput = document.createElement("input");
   formInput.id = "form-input-id";
   formInput.placeholder = "Type a place";
   formInput.value = "Budapest";
 
   const btn = document.createElement("button");
+  btn.id = "search-button";
   btn.textContent = "Search";
+
+  const changeMetric = document.createElement("button");
+  changeMetric.id = "change-metric-id";
+  changeMetric.type = "button";
+  changeMetric.textContent = "Switch to °F";
 
   const render = document.createElement("div");
   render.id = "render";
@@ -32,78 +43,94 @@ export const renderWeatherInfo = () => {
   const errorMsg = document.createElement("div");
   errorMsg.id = "error-msg";
 
-  form.append(label, formInput, btn);
+  form.append(label, formInput, btn, changeMetric);
+  container.append(form, errorMsg, render);
 
-  container.appendChild(form);
-  container.appendChild(errorMsg);
-  container.appendChild(render);
+  let currentUnit = "metric";
+  let lastSearchedLocation = null;
+
+  const refreshUI = (data) => {
+    render.innerHTML = "";
+    renderWeather(data, render, currentUnit);
+    render.appendChild(renderHours(data, currentUnit));
+    render.appendChild(renderDays(data, currentUnit));
+  };
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const location = formInput.value.trim();
+
     if (!location) {
       errorMsg.textContent = "Must search for a city!";
       render.innerHTML = "";
       renderBackgroundImg(null);
+      updateSearchedCity(null);
+      lastSearchedLocation = null;
       return;
     }
 
-    const data = await weather(location);
+    const data = await weather(location, currentUnit);
 
     if (!data || data.error) {
       errorMsg.textContent = "Sorry! Not a valid place!";
       render.innerHTML = "";
       renderBackgroundImg(null);
+      updateSearchedCity(null);
+      lastSearchedLocation = null;
       return;
     }
 
+    lastSearchedLocation = location;
     errorMsg.textContent = "";
-    renderWeather(data, render);
 
-    const conditions = data.currentConditions.conditions;
-    renderBackgroundImg(conditions);
+    refreshUI(data);
+    updateSearchedCity(data.address.toUpperCase());
+    renderBackgroundImg(data.currentConditions.conditions);
+  });
+
+  changeMetric.addEventListener("click", async () => {
+    if (!lastSearchedLocation) return;
+
+    currentUnit = currentUnit === "metric" ? "us" : "metric";
+
+    changeMetric.textContent =
+      currentUnit === "metric" ? "Switch to °F" : "Switch to °C";
+
+    const data = await weather(lastSearchedLocation, currentUnit);
+
+    if (!data || data.error) return;
+
+    refreshUI(data);
+    updateSearchedCity(data.address.toUpperCase());
   });
 };
 
 export const renderBackgroundImg = (conditions) => {
   const container = document.getElementById("container");
 
-  const img = document.createElement("img");
-  img.id = "background-image";
-
   const oldImg = container.querySelector("#background-image");
-  if (oldImg) {
-    oldImg.remove();
-  }
+  if (oldImg) oldImg.remove();
 
   if (!conditions) return;
 
+  const img = document.createElement("img");
+  img.id = "background-image";
+
   const condition = conditions.toLowerCase();
 
-  if (condition.includes("rain")) {
-    img.src = rain;
-  } else if (condition.includes("clear")) {
-    img.src = clear;
-  } else if (condition.includes("thunderstorm")) {
-    img.src = thunderstorm;
-  } else if (condition.includes("fog")) {
-    img.src = fog;
-  } else if (condition.includes("snow")) {
-    img.src = snow;
-  } else if (condition.includes("sand")) {
-    img.src = sand;
-  } else if (condition.includes("partially cloudy")) {
-    img.src = partiallyCloudy;
-  } else if (condition.includes("tornado")) {
-    img.src = tornado;
-  } else if (condition.includes("wind")) {
-    img.src = wind;
-  } else if (condition.includes("cloudy")) {
-    img.src = cloudy;
-  } else if (condition.includes("overcast")) {
-    img.src = overcast;
-  }
+  if (condition.includes("rain")) img.src = rain;
+  else if (condition.includes("clear")) img.src = clear;
+  else if (condition.includes("thunderstorm")) img.src = thunderstorm;
+  else if (condition.includes("fog")) img.src = fog;
+  else if (condition.includes("snow")) img.src = snow;
+  else if (condition.includes("sand")) img.src = sand;
+  else if (condition.includes("partially cloudy")) img.src = partiallyCloudy;
+  else if (condition.includes("tornado")) img.src = tornado;
+  else if (condition.includes("wind")) img.src = wind;
+  else if (condition.includes("cloudy")) img.src = cloudy;
+  else if (condition.includes("overcast")) img.src = overcast;
+  else img.src = partiallyCloudy;
 
   container.appendChild(img);
 };

@@ -1,4 +1,4 @@
-import cloudy from "./weatherIcons/cloudyIcon.png";
+﻿import cloudy from "./weatherIcons/cloudyIcon.png";
 import rainy from "./weatherIcons/rainyIcon.png";
 import partiallyCloudy from "./weatherIcons/partiallyCloudyIcon.png";
 import snow from "./weatherIcons/snowyIcon.png";
@@ -6,7 +6,7 @@ import storm from "./weatherIcons/stormIcon.png";
 import sunny from "./weatherIcons/sunnyIcon.png";
 import wind from "./weatherIcons/windIcon.png";
 
-const renderDays = (data) => {
+const renderDays = (data, currentUnit = "metric") => {
   const days = document.createElement("div");
   days.classList.add("days");
 
@@ -14,10 +14,13 @@ const renderDays = (data) => {
     const dayDiv = document.createElement("div");
     dayDiv.classList.add("day-div");
 
+    const tempUnit = currentUnit === "metric" ? "°C" : "°F";
+
     dayDiv.innerHTML = `
       <div id="day-date">Date: ${day.datetime}</div>
-      <div id="day-tempmin">Min: ${day.tempmin}</div>
-      <div id="day-tempmax">Max: ${day.tempmax}</div>
+      <div id="day-tempmin">Min: ${day.tempmin}${tempUnit}</div>
+      <div id="day-tempmax">Max: ${day.tempmax}${tempUnit}</div>
+      <div>Precipitation Probability: ${day.precipprob}%</div>
     `;
 
     const img = document.createElement("img");
