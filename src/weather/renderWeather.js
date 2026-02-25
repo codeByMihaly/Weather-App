@@ -63,8 +63,8 @@ const renderWeather = (data, render, currentUnit = "metric") => {
   render.appendChild(divSpaceUpper);
   render.appendChild(weatherWrapper);
   render.appendChild(divSpaceBottom);
-  render.appendChild(renderHours(data));
-  render.appendChild(renderDays(data));
+  render.appendChild(renderHours(data, currentUnit));
+  render.appendChild(renderDays(data, currentUnit));
 };
 
 export default renderWeather;

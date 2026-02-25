@@ -52,8 +52,6 @@ export const renderWeatherInfo = () => {
   const refreshUI = (data) => {
     render.innerHTML = "";
     renderWeather(data, render, currentUnit);
-    render.appendChild(renderHours(data, currentUnit));
-    render.appendChild(renderDays(data, currentUnit));
   };
 
   form.addEventListener("submit", async (e) => {
