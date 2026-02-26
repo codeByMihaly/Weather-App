@@ -19,25 +19,28 @@ const renderWeather = (data, render, currentUnit = "metric") => {
     let value;
 
     if (key === "description" || key === "address") {
-      value = data[key] || data.currentConditions[key];
+      value = `<span class ="unit">${data[key] || data.currentConditions[key]}</span>`;
     } else if (key === "tempmax" || key === "tempmin") {
-      value = `${data.days[0][key]}${tempUnit}`;
+      value = `<span class ="unit"> ${data.days[0][key]}${tempUnit}</span>`;
+    } else if (key === "datetime" || key === "conditions") {
+      value = `<span class ="unit"> ${data.currentConditions[key]}</span>`;
     } else if (key === "temp" || key === "feelslike") {
-      value = `${data.currentConditions[key]}${tempUnit}`;
+      value = `<span class ="unit"> ${data.currentConditions[key]}${tempUnit}</span>`;
     } else if (key === "windspeed") {
-      value = `${data.currentConditions[key]} ${speedUnit}`;
+      value = `<span class ="unit"> ${data.currentConditions[key]} ${speedUnit}</span>`;
     } else if (key === "precipprob") {
-      value = `${data.currentConditions[key]}%`;
+      value = `<span class ="unit"> ${data.currentConditions[key]}%</span>`;
     } else if (key === "precip") {
-      value = `${data.currentConditions[key]} ${precipUnit}`;
+      value = `<span class ="unit"> ${data.currentConditions[key]} ${precipUnit}</span>`;
     } else if (key === "cloudcover") {
-      value = `${data.currentConditions[key]}%`;
+      value = `<span class ="unit"> ${data.currentConditions[key]}%</span>`;
     } else if (key === "humidity") {
-      value = `${data.currentConditions[key]}%`;
+      value = `<span class ="unit"> ${data.currentConditions[key]}%</span>`;
     } else {
       value = data.currentConditions[key];
     }
-    div.textContent = ` ${WeatherFields[key]}: ${value}`;
+
+    div.innerHTML = ` ${WeatherFields[key]}: ${value}`;
 
     weatherWrapper.appendChild(div);
   }

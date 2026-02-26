@@ -1,8 +1,6 @@
 ﻿import weather from "./fetchWeather.js";
 import renderWeather from "./renderWeather.js";
 import { updateSearchedCity } from "../header.js";
-import renderDays from "./renderDays.js";
-import renderHours from "./renderHours.js";
 
 import clear from "./backgroundImages/clear.jpg";
 import cloudy from "./backgroundImages/cloudy.jpg";
@@ -18,6 +16,11 @@ import partiallyCloudy from "./backgroundImages/partiallyCloudy.jpg";
 
 export const renderWeatherInfo = () => {
   const container = document.getElementById("container");
+
+  const loadingScreen = document.createElement("div");
+  loadingScreen.id = "loading-screen";
+  loadingScreen.textContent = "Loading...";
+  loadingScreen.style.display = "none";
 
   const form = document.createElement("form");
   const label = document.createElement("label");
@@ -36,6 +39,7 @@ export const renderWeatherInfo = () => {
   changeMetric.id = "change-metric-id";
   changeMetric.type = "button";
   changeMetric.textContent = "Switch to °F";
+  changeMetric.style.display = "none";
 
   const render = document.createElement("div");
   render.id = "render";
@@ -44,7 +48,7 @@ export const renderWeatherInfo = () => {
   errorMsg.id = "error-msg";
 
   form.append(label, formInput, btn, changeMetric);
-  container.append(form, errorMsg, render);
+  container.append(form, errorMsg, render, loadingScreen);
 
   let currentUnit = "metric";
   let lastSearchedLocation = null;
@@ -59,12 +63,16 @@ export const renderWeatherInfo = () => {
 
     const location = formInput.value.trim();
 
+    render.innerHTML = "";
+    errorMsg.textContent = "";
+    renderBackgroundImg(null);
+    updateSearchedCity("");
+    loadingScreen.style.display = "block";
+    changeMetric.style.display = "none";
+
     if (!location) {
       errorMsg.textContent = "Must search for a city!";
-      render.innerHTML = "";
-      renderBackgroundImg(null);
-      updateSearchedCity(null);
-      lastSearchedLocation = null;
+      loadingScreen.style.display = "none";
       return;
     }
 
@@ -72,19 +80,24 @@ export const renderWeatherInfo = () => {
 
     if (!data || data.error) {
       errorMsg.textContent = "Sorry! Not a valid place!";
-      render.innerHTML = "";
-      renderBackgroundImg(null);
-      updateSearchedCity(null);
-      lastSearchedLocation = null;
+      loadingScreen.style.display = "none";
       return;
     }
 
     lastSearchedLocation = location;
     errorMsg.textContent = "";
 
-    refreshUI(data);
-    updateSearchedCity(data.address.toUpperCase());
-    renderBackgroundImg(data.currentConditions.conditions);
+    const backgroundImg = renderBackgroundImg(
+      data.currentConditions.conditions,
+    );
+
+    setTimeout(() => {
+      loadingScreen.style.display = "none";
+      refreshUI(data);
+      updateSearchedCity(data.address.toUpperCase());
+      backgroundImg.style.display = "block";
+      changeMetric.style.display = "block";
+    }, 1000);
   });
 
   changeMetric.addEventListener("click", async () => {
@@ -99,8 +112,10 @@ export const renderWeatherInfo = () => {
 
     if (!data || data.error) return;
 
-    refreshUI(data);
-    updateSearchedCity(data.address.toUpperCase());
+    setTimeout(() => {
+      refreshUI(data);
+      updateSearchedCity(data.address.toUpperCase());
+    }, 1000);
   });
 };
 
@@ -114,15 +129,20 @@ export const renderBackgroundImg = (conditions) => {
 
   const img = document.createElement("img");
   img.id = "background-image";
+  img.style.display = "none";
 
   const condition = conditions.toLowerCase();
 
-  if (condition.includes("rain")) img.src = rain;
-  else if (condition.includes("clear")) img.src = clear;
+  if (condition.includes("rain")) {
+    img.src = rain;
+    render.style.color = "#a39a6f";
+  } else if (condition.includes("clear")) img.src = clear;
   else if (condition.includes("thunderstorm")) img.src = thunderstorm;
   else if (condition.includes("fog")) img.src = fog;
-  else if (condition.includes("snow")) img.src = snow;
-  else if (condition.includes("sand")) img.src = sand;
+  else if (condition.includes("snow")) {
+    img.src = snow;
+    render.style.color = "#a39a6f";
+  } else if (condition.includes("sand")) img.src = sand;
   else if (condition.includes("partially cloudy")) img.src = partiallyCloudy;
   else if (condition.includes("tornado")) img.src = tornado;
   else if (condition.includes("wind")) img.src = wind;
@@ -131,4 +151,6 @@ export const renderBackgroundImg = (conditions) => {
   else img.src = partiallyCloudy;
 
   container.appendChild(img);
+
+  return img;
 };

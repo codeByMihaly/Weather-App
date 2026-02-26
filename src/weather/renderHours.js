@@ -17,9 +17,9 @@ const renderHours = (data, currentUnit = "metric") => {
     hourDiv.classList.add("hour-div");
 
     hourDiv.innerHTML = `
-      <div id="hour-time">Hour: ${hour.datetime}</div>
-      <div id="hour-temp">Temp: ${hour.temp}${tempUnit}</div>
-      <div>Precipitation Probability: ${hour.precipprob}%</div>
+      <div id="hour-time">${hour.datetime}</div>
+      <div id="hour-temp">Temp: <strong>${hour.temp}${tempUnit}</strong></div>
+      <div id="hour-prec">Precipitation Probability: <strong>${hour.precipprob}%</strong></div>
     `;
 
     const img = document.createElement("img");

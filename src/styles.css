@@ -108,6 +108,14 @@ input {
   font-weight: bold;
 }
 
+#loading-screen {
+  text-align: center;
+  font-size: 5rem;
+  font-weight: bold;
+  color: lightblue;
+  margin: 2em;
+}
+
 #render {
   display: grid;
   width: 100%;
@@ -146,9 +154,18 @@ input {
 }
 
 .weather-field {
-  border: 2px solid rgb(192, 12, 12);
+  border: 2px solid rgb(76, 182, 76);
   background-color: rgba(173, 216, 230, 0.26);
+  transition: all 0.2s ease-in;
   padding: 1em;
+}
+
+.weather-field:hover {
+  background-color: rgba(173, 216, 230, 0.66);
+}
+
+.unit {
+  font-weight: bold;
 }
 
 #div-space-upper {
@@ -180,6 +197,17 @@ input {
   border: 2px solid lightblue;
   padding: 1em;
   background-color: rgba(173, 216, 230, 0.26);
+  transition: all 0.2s ease-in;
+}
+
+.hour-div:hover {
+  background-color: rgba(173, 216, 230, 0.66);
+}
+
+#hour-time {
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em;
 }
 
 .days {
@@ -192,9 +220,20 @@ input {
 }
 
 .day-div {
-  border: 2px solid yellow;
+  border: 2px solid rgb(175, 175, 71);
   padding: 1em;
   background-color: rgba(173, 216, 230, 0.26);
+  transition: all 0.2s ease-in;
+}
+
+.day-div:hover {
+  background-color: rgba(173, 216, 230, 0.66);
+}
+
+#day-date {
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em;
 }
 
 #footer-id {

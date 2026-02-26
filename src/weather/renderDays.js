@@ -17,10 +17,10 @@ const renderDays = (data, currentUnit = "metric") => {
     const tempUnit = currentUnit === "metric" ? "°C" : "°F";
 
     dayDiv.innerHTML = `
-      <div id="day-date">Date: ${day.datetime}</div>
-      <div id="day-tempmin">Min: ${day.tempmin}${tempUnit}</div>
-      <div id="day-tempmax">Max: ${day.tempmax}${tempUnit}</div>
-      <div>Precipitation Probability: ${day.precipprob}%</div>
+      <div id="day-date">${day.datetime}</div>
+      <div id="day-tempmin">Min: <strong>${day.tempmin}${tempUnit}</strong></div>
+      <div id="day-tempmax">Max: <strong>${day.tempmax}${tempUnit}</strong></div>
+      <div>Precipitation Probability: <strong>${day.precipprob}%</strong></div>
     `;
 
     const img = document.createElement("img");
