@@ -135,7 +135,7 @@ export const renderBackgroundImg = (conditions) => {
 
   if (condition.includes("rain")) {
     img.src = rain;
-    render.style.color = "#a39a6f";
+    render.style.color = "#00ffdd";
   } else if (condition.includes("clear")) img.src = clear;
   else if (condition.includes("thunderstorm")) img.src = thunderstorm;
   else if (condition.includes("fog")) img.src = fog;
