@@ -10,6 +10,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -362,8 +363,38 @@ input {
 /* On mobile */
 
 @media (max-width: 768px) {
+  form {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+    margin: 0.5em;
+  }
+
+  label {
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  input {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  #search-button,
+  #change-metric-id {
+    width: 90%;
+    margin: 0.5em auto;
+  }
+
+  #div-space-upper {
+    margin-bottom: 1em;
+  }
+
   #render {
+    flex: 1;
     grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
     grid-template-areas:
       "gap"
       "weather"
@@ -372,6 +403,12 @@ input {
       "hour"
       "day-title"
       "day";
+  }
+
+  .hours,
+  .days,
+  .weatherWrapper-field {
+    margin: 0em;
   }
 
   #change-metric-id {
@@ -398,4 +435,14 @@ input {
     justify-content: center;
     margin-left: 0;
   }
+}
+
+#footer-id {
+  margin-top: 1em;
+  background-color: lightblue;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  opacity: 0.5;
+  padding: 1em;
 }
