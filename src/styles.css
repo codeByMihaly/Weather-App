@@ -346,6 +346,11 @@ input {
 }
 
 @media (max-width: 1300px) {
+  #background-image {
+    height: auto;
+    min-height: 100%;
+  }
+
   .hours {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -363,6 +368,11 @@ input {
 /* On mobile */
 
 @media (max-width: 768px) {
+  #background-image {
+    height: auto;
+    min-height: 100%;
+  }
+
   form {
     flex-direction: column;
     width: 100%;
