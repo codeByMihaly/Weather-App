@@ -1,3 +1,5 @@
+// Rendered fields
+
 const WeatherFields = {
   datetime: "Observation Time",
   conditions: "Weather Condition",

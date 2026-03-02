@@ -1,3 +1,5 @@
+// Footer side
+
 const footerRender = () => {
   const container = document.getElementById("container");
 

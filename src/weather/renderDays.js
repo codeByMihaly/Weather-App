@@ -1,4 +1,6 @@
-﻿import cloudy from "./weatherIcons/cloudyIcon.png";
+﻿// Render days
+
+import cloudy from "./weatherIcons/cloudyIcon.png";
 import rainy from "./weatherIcons/rainyIcon.png";
 import partiallyCloudy from "./weatherIcons/partiallyCloudyIcon.png";
 import snow from "./weatherIcons/snowyIcon.png";
@@ -10,11 +12,15 @@ const renderDays = (data, currentUnit = "metric") => {
   const days = document.createElement("div");
   days.classList.add("days");
 
+  // Next 15 days
+
   data.days.slice(0, 15).forEach((day) => {
     const dayDiv = document.createElement("div");
     dayDiv.classList.add("day-div");
 
     const tempUnit = currentUnit === "metric" ? "°C" : "°F";
+
+    // Rendered data
 
     dayDiv.innerHTML = `
       <div id="day-date">${day.datetime}</div>
@@ -32,6 +38,8 @@ const renderDays = (data, currentUnit = "metric") => {
     }
 
     const dayIcon = day.conditions.toLowerCase();
+
+    // Icons for days
 
     if (dayIcon.includes("wind")) {
       img.src = wind;

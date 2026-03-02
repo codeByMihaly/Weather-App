@@ -1,3 +1,5 @@
+// Header side
+
 const headerRender = () => {
   const container = document.getElementById("container");
 
@@ -15,6 +17,8 @@ const headerRender = () => {
   headerDiv.append(header, searchedCity);
   container.append(headerDiv);
 };
+
+// Searched city will be at the header
 
 export const updateSearchedCity = (city) => {
   const searchedCity = document.getElementById("searched-city-id");

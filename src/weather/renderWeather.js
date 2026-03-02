@@ -1,4 +1,6 @@
-﻿import renderHours from "./renderHours.js";
+﻿// Render today
+
+import renderHours from "./renderHours.js";
 import renderDays from "./renderDays.js";
 import WeatherFields from "./weatherFields.js";
 
@@ -11,6 +13,8 @@ const renderWeather = (data, render, currentUnit = "metric") => {
   const tempUnit = currentUnit === "metric" ? "°C" : "°F";
   const speedUnit = currentUnit === "metric" ? "km/h" : "mph";
   const precipUnit = currentUnit === "metric" ? "mm" : "in";
+
+  // Every rendered data
 
   for (const key in WeatherFields) {
     const div = document.createElement("div");
@@ -45,6 +49,8 @@ const renderWeather = (data, render, currentUnit = "metric") => {
     weatherWrapper.appendChild(div);
   }
 
+  // Paragraphs between data-s
+
   const divSpaceUpper = document.createElement("div");
   divSpaceUpper.classList.add("div-space");
   divSpaceUpper.id = "div-space-upper";
@@ -62,11 +68,13 @@ const renderWeather = (data, render, currentUnit = "metric") => {
   divDaysPara.id = "div-days-para";
   divDaysPara.textContent = "Upcoming days";
 
-  divSpaceBottom.append(divHoursPara, divDaysPara);
   render.appendChild(divSpaceUpper);
   render.appendChild(weatherWrapper);
   render.appendChild(divSpaceBottom);
+
+  render.append(divHoursPara);
   render.appendChild(renderHours(data, currentUnit));
+  render.append(divDaysPara);
   render.appendChild(renderDays(data, currentUnit));
 };
 

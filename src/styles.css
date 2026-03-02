@@ -1,3 +1,5 @@
+/* General style */
+
 *,
 *::after,
 *::before {
@@ -25,6 +27,8 @@ body {
   flex: 1;
 }
 
+/* Header side */
+
 #header-div {
   background-color: lightblue;
   width: 100%;
@@ -39,6 +43,8 @@ body {
 #header-id {
   align-self: center;
 }
+
+/* Input side */
 
 #searched-city-id {
   align-self: flex-end;
@@ -64,6 +70,8 @@ input {
   opacity: 0.7;
 }
 
+/* Search button */
+
 #search-button {
   padding: 1em;
   border-radius: 2em;
@@ -80,6 +88,8 @@ input {
 #search-button:active {
   opacity: 1;
 }
+
+/* Change metric button */
 
 #change-metric-id {
   display: flex;
@@ -103,10 +113,14 @@ input {
   opacity: 1;
 }
 
+/* Error message */
+
 #error-msg {
   font-size: 1.1rem;
   font-weight: bold;
 }
+
+/* Loading screen */
 
 #loading-screen {
   text-align: center;
@@ -115,6 +129,8 @@ input {
   color: lightblue;
   margin: 2em;
 }
+
+/* General render */
 
 #render {
   display: grid;
@@ -125,9 +141,11 @@ input {
     "weather weather weather weather weather weather"
     "weather weather weather weather weather weather"
     "space space space space space space"
-    "hour hour hour day day day"
+    "hour-title hour-title hour-title day-title day-title day-title"
     "hour hour hour day day day";
 }
+
+/* Background images */
 
 #background-image {
   position: absolute;
@@ -139,16 +157,20 @@ input {
   z-index: -1;
 }
 
+/* Weather icons */
+
 #icon-image {
   width: 30px;
   height: 30px;
 }
 
+/* Today-s weather */
+
 .weatherWrapper-field {
   grid-area: weather;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  min-height: 25vh;
+  min-height: 300px;
   gap: 2em;
   margin: 2em;
 }
@@ -164,9 +186,13 @@ input {
   background-color: rgba(173, 216, 230, 0.66);
 }
 
+/* Units */
+
 .unit {
   font-weight: bold;
 }
+
+/* Paragraph side */
 
 #div-space-upper {
   grid-area: gap;
@@ -174,6 +200,7 @@ input {
   margin-left: 6em;
   font-size: 1.5rem;
   font-weight: bold;
+  text-decoration: underline rgb(76, 182, 76);
 }
 
 #div-space-bottom {
@@ -183,6 +210,8 @@ input {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+/* Hours side */
 
 .hours {
   display: grid;
@@ -210,6 +239,17 @@ input {
   padding: 0.5em;
 }
 
+#div-hours-para {
+  grid-area: hour-title;
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: underline lightblue;
+}
+
+/* Days side */
+
 .days {
   display: grid;
   grid-area: day;
@@ -236,6 +276,17 @@ input {
   padding: 0.5em;
 }
 
+#div-days-para {
+  grid-area: day-title;
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: underline rgb(175, 175, 71);
+}
+
+/* Footer side */
+
 #footer-id {
   background-color: lightblue;
   display: flex;
@@ -244,4 +295,107 @@ input {
   justify-content: center;
   opacity: 0.5;
   padding: 1em;
+}
+
+/* On regular monitor */
+
+@media (max-width: 1800px) {
+  #render {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "gap"
+      "weather"
+      "space"
+      "hour-title"
+      "hour"
+      "day-title"
+      "day";
+  }
+}
+
+@media (max-width: 1800px) {
+  .hours {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .days {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .weatherWrapper-field {
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 75vh;
+  }
+}
+
+/* On tablet */
+
+@media (max-width: 1300px) {
+  #render {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "gap"
+      "weather"
+      "space"
+      "hour-title"
+      "hour"
+      "day-title"
+      "day";
+  }
+}
+
+@media (max-width: 1300px) {
+  .hours {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .days {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .weatherWrapper-field {
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 75vh;
+  }
+}
+
+/* On mobile */
+
+@media (max-width: 768px) {
+  #render {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "gap"
+      "weather"
+      "space"
+      "hour-title"
+      "hour"
+      "day-title"
+      "day";
+  }
+
+  #change-metric-id {
+    position: static;
+    margin: 1em auto;
+    display: block;
+  }
+
+  .weatherWrapper-field {
+    grid-template-columns: 1fr;
+    min-height: 75vh;
+  }
+
+  .hours {
+    grid-template-columns: 1fr;
+  }
+
+  .days {
+    grid-template-columns: 1fr;
+  }
+
+  #div-space-upper,
+  #div-space-bottom {
+    justify-content: center;
+    margin-left: 0;
+  }
 }

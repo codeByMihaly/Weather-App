@@ -1,4 +1,6 @@
-﻿import weather from "./fetchWeather.js";
+﻿// All rendered info-s are here
+
+import weather from "./fetchWeather.js";
 import renderWeather from "./renderWeather.js";
 import { updateSearchedCity } from "../header.js";
 
@@ -14,22 +16,23 @@ import tornado from "./backgroundImages/tornado.jpg";
 import wind from "./backgroundImages/wind.jpg";
 import partiallyCloudy from "./backgroundImages/partiallyCloudy.jpg";
 
+// Every paragraph and button before and after render
+
 export const renderWeatherInfo = () => {
   const container = document.getElementById("container");
 
   const loadingScreen = document.createElement("div");
   loadingScreen.id = "loading-screen";
-  loadingScreen.textContent = "Loading...";
+  loadingScreen.textContent = "Fetching weather data...";
   loadingScreen.style.display = "none";
 
   const form = document.createElement("form");
   const label = document.createElement("label");
-  label.textContent = "Search for a city!";
+  label.textContent = "Search for a city";
 
   const formInput = document.createElement("input");
   formInput.id = "form-input-id";
-  formInput.placeholder = "Type a place";
-  formInput.value = "Budapest";
+  formInput.placeholder = "Enter city name";
 
   const btn = document.createElement("button");
   btn.id = "search-button";
@@ -50,6 +53,8 @@ export const renderWeatherInfo = () => {
   form.append(label, formInput, btn, changeMetric);
   container.append(form, errorMsg, render, loadingScreen);
 
+  // Metric by default
+
   let currentUnit = "metric";
   let lastSearchedLocation = null;
 
@@ -57,6 +62,8 @@ export const renderWeatherInfo = () => {
     render.innerHTML = "";
     renderWeather(data, render, currentUnit);
   };
+
+  //Add event listener for the submit button
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -70,26 +77,32 @@ export const renderWeatherInfo = () => {
     loadingScreen.style.display = "block";
     changeMetric.style.display = "none";
 
+    // If the input filed is empty
+
     if (!location) {
-      errorMsg.textContent = "Must search for a city!";
+      errorMsg.textContent = "Please enter a city.";
       loadingScreen.style.display = "none";
       return;
     }
 
     const data = await weather(location, currentUnit);
 
+    // If the input filed is not exist
+
     if (!data || data.error) {
-      errorMsg.textContent = "Sorry! Not a valid place!";
+      errorMsg.textContent = "City not found.";
       loadingScreen.style.display = "none";
       return;
     }
 
-    lastSearchedLocation = location;
+    lastSearchedLocation = data.address;
     errorMsg.textContent = "";
 
     const backgroundImg = renderBackgroundImg(
       data.currentConditions.conditions,
     );
+
+    // Intentional made some delay but in the background the data is working.
 
     setTimeout(() => {
       loadingScreen.style.display = "none";
@@ -99,6 +112,8 @@ export const renderWeatherInfo = () => {
       changeMetric.style.display = "block";
     }, 1000);
   });
+
+  // Metric button. here you can change it.
 
   changeMetric.addEventListener("click", async () => {
     if (!lastSearchedLocation) return;
@@ -119,19 +134,27 @@ export const renderWeatherInfo = () => {
   });
 };
 
+// Background images. here you can change them.
+
 export const renderBackgroundImg = (conditions) => {
   const container = document.getElementById("container");
+  const render = document.getElementById("render");
 
   const oldImg = container.querySelector("#background-image");
   if (oldImg) oldImg.remove();
 
-  if (!conditions) return;
+  if (!conditions) {
+    render.style.color = "";
+    return;
+  }
 
   const img = document.createElement("img");
   img.id = "background-image";
   img.style.display = "none";
 
   const condition = conditions.toLowerCase();
+
+  render.style.color = "";
 
   if (condition.includes("rain")) {
     img.src = rain;

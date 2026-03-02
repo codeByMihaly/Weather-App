@@ -1,3 +1,5 @@
+// Render hours
+
 import cloudy from "./weatherIcons/cloudyIcon.png";
 import rainy from "./weatherIcons/rainyIcon.png";
 import partiallyCloudy from "./weatherIcons/partiallyCloudyIcon.png";
@@ -12,9 +14,13 @@ const renderHours = (data, currentUnit = "metric") => {
 
   const tempUnit = currentUnit === "metric" ? "°C" : "°F";
 
+  // Render every hour
+
   data.days[0].hours.forEach((hour) => {
     const hourDiv = document.createElement("div");
     hourDiv.classList.add("hour-div");
+
+    // Render hour data
 
     hourDiv.innerHTML = `
       <div id="hour-time">${hour.datetime}</div>
@@ -29,6 +35,8 @@ const renderHours = (data, currentUnit = "metric") => {
     if (icon) {
       icon.remove();
     }
+
+    // Render icons
 
     const dayIcon = hour.conditions.toLowerCase();
 

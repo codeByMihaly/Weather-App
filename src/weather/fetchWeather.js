@@ -1,3 +1,5 @@
+// Fetching weather data here
+
 const weather = async function fetchWeather(location, unit = "metric") {
   try {
     const data = await fetch(
