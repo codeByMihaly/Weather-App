@@ -1,8 +1,7 @@
 ﻿# Weather App
 
-Live Demo:
+## Live Demo: https://codebymihaly.github.io/Weather-App/
 
-Weather App
 A modern, fully responsive weather application built with asynchronous JavaScript, modular ES6 architecture, and the Visual Crossing Weather API.  
 The app provides:
 
@@ -15,7 +14,7 @@ The app provides:
 
 All data fetching is handled through async/await, ensuring clean, readable, and non blocking code execution.
 
-Features
+# Features
 
 Current Weather (Async Loaded)
 Fetched asynchronously from the Visual Crossing API, including: - Temperature and feels like temperature  
@@ -26,21 +25,21 @@ Fetched asynchronously from the Visual Crossing API, including: - Temperature an
  - Weather description  
  - Location name
 
-Hourly Forecast (24 hours)
+# Hourly Forecast (24 hours)
 
 - Temperature
 - Precipitation probability
 - Weather condition icons
 - Responsive grid layout (6 columns → 3 → 1 depending on screen size)
 
-15 Day Forecast
+# 15 Day Forecast
 
 - Daily min/max temperature
 - Precipitation probability
 - Weather icons
 - Responsive grid layout (5 columns → 3 → 1)
 
-Dynamic Backgrounds
+# Dynamic Backgrounds
 The background image changes based on the current weather condition:
 
 - Clear
@@ -53,7 +52,7 @@ The background image changes based on the current weather condition:
 - Sand/dust
 - Partially cloudy
 
-Unit Switching (Async Refresh)
+# Unit Switching (Async Refresh)
 Switch between:
 
 - °C ↔ °F
@@ -62,9 +61,7 @@ Switch between:
 
 Switching units triggers a new asynchronous API call and re-renders the entire UI.
 
----
-
-Technologies Used
+# Technologies Used
 
 - JavaScript (ES6 Modules)
 - Async/Await for API calls
@@ -73,7 +70,7 @@ Technologies Used
 - Visual Crossing Weather API
 - Modular rendering system (separate modules for hours, days, weather fields)
 
-Photos By:
+# Photos By:
 Clear - Photo by <a href="https://unsplash.com/de/@yurijean?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dorothy Ere</a> auf <a href="https://unsplash.com/de/fotos/ein-flugzeug-das-einen-kondensstreifen-uber-einen-klaren-blauen-himmel-hinterlasst-OZmWXcaRw1Q?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 Partially cloudy - Photo by <a href="https://unsplash.com/de/@abaid007?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Abaidullah bhatti</a> auf <a href="https://unsplash.com/de/fotos/ein-flugzeug-das-durch-einen-wolkenverhangenen-blauen-himmel-fliegt-cNApBGj64gI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 Cloudy - Photo by <a href="https://unsplash.com/@iklas_rahman?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Iklas</a> on <a href="https://unsplash.com/photos/a-group-of-people-standing-on-top-of-a-beach-under-a-cloudy-sky-07yRU_lKMWA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
@@ -86,4 +83,8 @@ Sand - Photo by <a href="https://unsplash.com/@hdjislk?utm_source=unsplash&utm_m
 Wind - Photo by <a href="https://unsplash.com/@mahkeo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Khamkéo</a> on <a href="https://unsplash.com/photos/trees-with-wind-photo-WtwSsqwYlA0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 Tornado - Photo by <a href="https://unsplash.com/@nikolasnoonan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nikolas Noonan</a> on <a href="https://unsplash.com/photos/storm-near-leafed-plants-fQM8cbGY6iQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
-Screenshots:
+# Screenshots:
+
+<img width="2504" height="1347" alt="Screenshot_2026-03-02_22-26-42" src="https://github.com/user-attachments/assets/aedc3f1b-a6ab-467d-9f6a-105c363a14db" />
+<img width="655" height="1196" alt="Screenshot_2026-03-02_22-27-58" src="https://github.com/user-attachments/assets/c31b6a7f-cdf0-4fbe-810e-baaf60170891" />
+
